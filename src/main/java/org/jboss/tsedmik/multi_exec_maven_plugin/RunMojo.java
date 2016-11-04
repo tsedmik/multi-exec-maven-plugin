@@ -32,22 +32,34 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.FileUtils;
 
 /**
- * TODO Add JavaDoc
+ * Executes given list of commands sequentially. After each command archive artifacts. 
  * 
  * @author tsedmik
  */
 @Mojo(name = "run")
 public class RunMojo extends AbstractMojo {
 
+	/**
+	 * Path from where the commands will be executed
+	 */
 	@Parameter
 	private File path;
 
+	/**
+	 * List of commands to execute
+	 */
 	@Parameter
 	private List<String> commands;
 
+	/**
+	 * Location from where files are archived
+	 */
 	@Parameter
 	private File archiveFrom;
 
+	/**
+	 * Location where archived files will be stored
+	 */
 	@Parameter
 	private File archiveTo;
 
