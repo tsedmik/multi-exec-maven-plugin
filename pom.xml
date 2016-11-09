@@ -8,6 +8,14 @@
 
 	<name>Maven plugin which is capable to execute a list of commands</name>
 
+	<distributionManagement>
+		<repository>
+			<id>bintray-tsedmik-maven</id>
+			<name>tsedmik-maven</name>
+			<url>https://api.bintray.com/maven/tsedmik/maven/multi-exec-maven-plugin/;publish=1</url>
+		</repository>
+	</distributionManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
