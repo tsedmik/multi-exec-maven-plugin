@@ -6,7 +6,7 @@ Set the following parameters:
 
 *path* - Path from where the commands will be executed
 *commands* - List of commands to execute
-*archiveFrom* - Location from where files are archived
+*archiveFrom* - Locations from where files are archived. If you want to specify more than one location, separate them with ',' comma 
 *archiveTo* - Location where archived files will be stored
 
 ### Example:
@@ -21,7 +21,7 @@ Example configuration:
          <param>mvn --version</param>
          <param>mvn --version</param>
        </commands>
-       <archiveFrom>src/main/java</archiveFrom>
+       <archiveFrom>src/main/java,src/test/java</archiveFrom>
        <archiveTo>target/test-archive</archiveTo>
      </configuration>
    </plugin>

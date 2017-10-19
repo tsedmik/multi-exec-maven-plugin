@@ -55,7 +55,7 @@ public class RunMojo extends AbstractMojo {
 	 * Location from where files are archived
 	 */
 	@Parameter
-	private File archiveFrom;
+	private String archiveFrom;
 
 	/**
 	 * Location where archived files will be stored
@@ -97,7 +97,7 @@ public class RunMojo extends AbstractMojo {
 
 	private void generateBeforeInfo() {
 		getLog().info("Path: " + path.getAbsolutePath());
-		getLog().info("Archive From: " + archiveFrom.getAbsolutePath());
+		getLog().info("Archive From: " + archiveFrom);
 		getLog().info("Archive To: " + archiveTo.getAbsolutePath());
 		getLog().info("----------");
 		getLog().info("");
@@ -140,9 +140,12 @@ public class RunMojo extends AbstractMojo {
 		getLog().info("----------");
 		getLog().info("Started archivation");
 		getLog().info("----------");
-		getLog().info("From: " + archiveFrom.getAbsolutePath());
+		getLog().info("From: " + archiveFrom);
 		getLog().info("To: " + archiveTo.getAbsolutePath());
-		FileUtils.copyDirectory(archiveFrom, archiveTo);
+		String[] paths = archiveFrom.split(",");
+		for (String path : paths) {
+			FileUtils.copyDirectory(new File(path), archiveTo);
+		}
 		getLog().info("----------");
 		getLog().info("Archivation completed!");
 		getLog().info("----------");

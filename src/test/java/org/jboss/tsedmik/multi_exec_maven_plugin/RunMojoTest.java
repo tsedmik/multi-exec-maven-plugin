@@ -28,6 +28,7 @@ public class RunMojoTest extends AbstractMojoTestCase {
 		}
 		File archivedFile = new File (getBasedir(), "target/test-archive/RunMojo.java");
 		assertNotNull(archivedFile);
+		archivedFile = new File (getBasedir(), "target/test-archive/RunMojoTest.java");
 		assertTrue(archivedFile.exists());
 	}
 }
