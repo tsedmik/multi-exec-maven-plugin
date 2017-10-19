@@ -144,7 +144,12 @@ public class RunMojo extends AbstractMojo {
 		getLog().info("To: " + archiveTo.getAbsolutePath());
 		String[] paths = archiveFrom.split(",");
 		for (String path : paths) {
-			FileUtils.copyDirectory(new File(path), archiveTo);
+			File location = new File(path);
+			if (!location.exists()) {
+				getLog().warn("Given location '" + path + "' does not exist");
+				continue;
+			}
+			FileUtils.copyDirectory(location, archiveTo);
 		}
 		getLog().info("----------");
 		getLog().info("Archivation completed!");

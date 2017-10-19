@@ -17,7 +17,7 @@
 						<param>mvn --version</param>
 						<param>mvn --version</param>
 					</commands>
-					<archiveFrom>src/main/java,src/test/java</archiveFrom>
+					<archiveFrom>src/main/java</archiveFrom>
 					<archiveTo>target/test-archive</archiveTo>
 				</configuration>
 			</plugin>

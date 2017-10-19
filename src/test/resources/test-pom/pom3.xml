@@ -17,8 +17,8 @@
 						<param>mvn --version</param>
 						<param>mvn --version</param>
 					</commands>
-					<archiveFrom>src/main/java,src/test/java</archiveFrom>
-					<archiveTo>target/test-archive2</archiveTo>
+					<archiveFrom>src/main/nonexistingdir</archiveFrom>
+					<archiveTo>target/test-archive3</archiveTo>
 				</configuration>
 			</plugin>
 		</plugins>
