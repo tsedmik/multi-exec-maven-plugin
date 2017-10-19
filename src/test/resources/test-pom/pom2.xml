@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.jboss.tsedmik</groupId>
+	<artifactId>test-runner</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Test Runner</name>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.jboss.tsedmik</groupId>
+				<artifactId>multi-exec-maven-plugin</artifactId>
+				<configuration>
+					<path>.</path>
+					<commands>
+						<param>mvn --version</param>
+						<param>mvn --version</param>
+					</commands>
+					<archiveFrom>src/main/java</archiveFrom>
+					<archiveTo>target/test-archive2</archiveTo>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
