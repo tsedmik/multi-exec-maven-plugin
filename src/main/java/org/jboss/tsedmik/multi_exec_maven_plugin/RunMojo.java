@@ -105,6 +105,11 @@ public class RunMojo extends AbstractMojo {
 			String substring = command.substring(index_from + 8, index_to);
 			command = command.replace(command.substring(index_from, index_to + 1), new File(substring).getAbsolutePath());
 		}
+
+		// Fix command for Windows
+		if (System.getProperty("os.name").toLowerCase().contains("win")) {
+			command = "cmd.exe /c " + command;	
+		}
 		return command;
 	}
 
