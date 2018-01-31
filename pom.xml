@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jboss.tsedmik</groupId>
 	<artifactId>multi-exec-maven-plugin</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.3</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>Maven plugin which is capable to execute a list of commands</name>
