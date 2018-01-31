@@ -14,13 +14,12 @@
 				<configuration>
 					<path>.</path>
 					<commands>
-						<param>mvn --version</param>
-						<param>mvn --version</param>
+						<param>ls $path{/mnt/}</param>
 					</commands>
 					<archiveFrom>
 						<param>src/main/java</param>
 					</archiveFrom>
-					<archiveTo>target/test-archive</archiveTo>
+					<archiveTo>target/test-archive4</archiveTo>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -19,12 +19,18 @@ Example configuration:
        <path>.</path>
        <commands>
          <param>mvn --version</param>
-         <param>mvn --version</param>
+         <param>ls $path{/mnt/hudson_jenkins}</param>
        </commands>
-       <archiveFrom>src/main/java,src/test/java</archiveFrom>
+       <archiveFrom>
+         <param>src/main/java</param>
+         <param>src/test/java</param>
+       </archiveFrom>
        <archiveTo>target/test-archive</archiveTo>
      </configuration>
    </plugin>
+
+#####Note
+Notice *$path{/mnt/hudson_jenkins}* in one command. This notation ensures that file path is correctly represented on different platforms
 
 #####Note
 This plugin was made on knowledge gained from:

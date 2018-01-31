@@ -55,7 +55,7 @@ public class RunMojo extends AbstractMojo {
 	 * Location from where files are archived
 	 */
 	@Parameter
-	private String archiveFrom;
+	private List<File> archiveFrom;
 
 	/**
 	 * Location where archived files will be stored
@@ -67,13 +67,14 @@ public class RunMojo extends AbstractMojo {
 
 		generateBeforeInfo();
 		for (int i = 0; i < commands.size(); i++) {
-			generateBeforeCommandInfo(i, commands.get(i));
+			String newCommand = preprocessCommand(commands.get(i));
+			generateBeforeCommandInfo(i, newCommand);
 
 			// command execution
 			Runtime rt = Runtime.getRuntime();
 			final Process pr;
 			try {
-				pr = rt.exec(commands.get(i), null, path);
+				pr = rt.exec(newCommand, null, path);
 			} catch (IOException e) {
 				throw new MojoExecutionException("IOException", e.getCause());
 			}
@@ -81,7 +82,7 @@ public class RunMojo extends AbstractMojo {
 			printCommandLog(pr);
 
 			try {
-				generateAfterCommandInfo(pr.waitFor(), commands.get(i));
+				generateAfterCommandInfo(pr.waitFor(), newCommand);
 			} catch (InterruptedException e) {
 				throw new MojoExecutionException("InterruptedException", e.getCause());
 			}
@@ -95,9 +96,24 @@ public class RunMojo extends AbstractMojo {
 
 	}
 
+	private String preprocessCommand(String command) {
+		// Fix filesystem path
+		// for example: $path{/mnt/hudson_jenkins/...}
+		while (command.contains("$path{")) {
+			int index_from = command.indexOf("$path{");
+			int index_to = command.indexOf("}", index_from);
+			String substring = command.substring(index_from + 6, index_to);
+			command = command.replace(command.substring(index_from, index_to + 1), new File(substring).getAbsolutePath());
+		}
+		return command;
+	}
+
 	private void generateBeforeInfo() {
 		getLog().info("Path: " + path.getAbsolutePath());
-		getLog().info("Archive From: " + archiveFrom);
+		getLog().info("Archive From: ");
+		for (File from : archiveFrom) {
+			getLog().info(from.getAbsolutePath());
+		}
 		getLog().info("Archive To: " + archiveTo.getAbsolutePath());
 		getLog().info("----------");
 		getLog().info("");
@@ -140,16 +156,17 @@ public class RunMojo extends AbstractMojo {
 		getLog().info("----------");
 		getLog().info("Started archivation");
 		getLog().info("----------");
-		getLog().info("From: " + archiveFrom);
+		getLog().info("Archive From: ");
+		for (File from : archiveFrom) {
+			getLog().info(from.getAbsolutePath());
+		}
 		getLog().info("To: " + archiveTo.getAbsolutePath());
-		String[] paths = archiveFrom.split(",");
-		for (String path : paths) {
-			File location = new File(path);
-			if (!location.exists()) {
+		for (File file : archiveFrom) {
+			if (!file.exists()) {
 				getLog().warn("Given location '" + path + "' does not exist");
 				continue;
 			}
-			FileUtils.copyDirectory(location, archiveTo);
+			FileUtils.copyDirectory(file, archiveTo);
 		}
 		getLog().info("----------");
 		getLog().info("Archivation completed!");
