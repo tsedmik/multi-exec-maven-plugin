@@ -86,7 +86,7 @@ public class RunMojoTest extends AbstractMojoTestCase {
 		System.setOut(new PrintStream(output));
 		try {
 			mojo.execute();
-			assertFalse(output.toString().contains("$path{"));
+			assertFalse(output.toString().contains("###path{"));
 			assertTrue(output.toString().contains("/mnt"));
 		} catch (Exception e) {
 			fail("Something is wrong with test build!");

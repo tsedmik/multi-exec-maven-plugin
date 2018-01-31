@@ -19,7 +19,7 @@ Example configuration:
        <path>.</path>
        <commands>
          <param>mvn --version</param>
-         <param>ls $path{/mnt/hudson_jenkins}</param>
+         <param>ls ###path{/mnt/hudson_jenkins}</param>
        </commands>
        <archiveFrom>
          <param>src/main/java</param>
@@ -30,7 +30,7 @@ Example configuration:
    </plugin>
 
 #####Note
-Notice *$path{/mnt/hudson_jenkins}* in one command. This notation ensures that file path is correctly represented on different platforms
+Notice *###path{/mnt/hudson_jenkins}* in one command. This notation ensures that file path is correctly represented on different platforms
 
 #####Note
 This plugin was made on knowledge gained from:

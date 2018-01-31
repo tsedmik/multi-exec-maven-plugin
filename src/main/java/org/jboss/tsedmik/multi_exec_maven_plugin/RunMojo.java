@@ -98,11 +98,11 @@ public class RunMojo extends AbstractMojo {
 
 	private String preprocessCommand(String command) {
 		// Fix filesystem path
-		// for example: $path{/mnt/hudson_jenkins/...}
-		while (command.contains("$path{")) {
-			int index_from = command.indexOf("$path{");
+		// for example: ###path{/mnt/hudson_jenkins/...}
+		while (command.contains("###path{")) {
+			int index_from = command.indexOf("###path{");
 			int index_to = command.indexOf("}", index_from);
-			String substring = command.substring(index_from + 6, index_to);
+			String substring = command.substring(index_from + 8, index_to);
 			command = command.replace(command.substring(index_from, index_to + 1), new File(substring).getAbsolutePath());
 		}
 		return command;
